@@ -1,23 +1,53 @@
-import styled from "styled-components/";
+import React from "react";
+import ReactDom from 'react-dom';
+import { ThemeProvider } from "styled-components";
+import { BsBookHalf } from "react-icons/bs";
 
-const Title = styled.h1`
-  font-size: 3em;
-  text-align : center;
-  color: palevioletred;
-`;
 
-const Wrapper = styled.section`
-    padding : 4rem;
-    background-color : papayawhip;
-`;
+import { Header,Main, Footer } from "./components/Layout";
+import { NavBar,NavItem,NavLink } from "./components/Navbar";
+
 
 function App() {
+        const theme = {
+          primary:{
+            main: "#29b6f6",
+            light: "#73e8ff",
+            dark: "#0086c3",
+            textColor: "#000",
+          },
+          secondary : {
+            main:"#fff",
+          },
+
+        };
+
   return (
-    <Wrapper>
-      <Title>
-      <h1>Imalsha</h1>
-    </Title>
-    </Wrapper>
+    <ThemeProvider theme={theme}>
+     <Header>
+      <NavBar>
+      <NavItem href="#">
+            <NavLink>
+            <BsBookHalf/>
+            </NavLink>
+        </NavItem>
+
+        <NavItem href="#">
+            <NavLink>
+            Catalog
+            </NavLink>
+        </NavItem>
+        
+        <NavItem href="#">
+          <NavLink>
+            Dashboard
+          </NavLink>
+        </NavItem>
+      </NavBar>
+            </Header>
+            <Main></Main>
+            <Footer></Footer>
+    </ThemeProvider>
     
     
   );
