@@ -1,11 +1,12 @@
 import React from "react";
-import ReactDom from 'react-dom';
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
 
 
-import { Header,Main, Footer } from "./components/Layout";
+import { Main, Footer } from "./components/Layout";
 import { NavBar,NavItem,NavLink } from "./components/Navbar";
+
+import Dashboard from "./containers/Dashboard";
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-     <Header>
+     
       <NavBar>
       <NavItem href="#">
             <NavLink>
@@ -37,15 +38,17 @@ function App() {
             Catalog
             </NavLink>
         </NavItem>
-        
+
         <NavItem href="#">
           <NavLink>
             Dashboard
           </NavLink>
         </NavItem>
       </NavBar>
-            </Header>
-            <Main></Main>
+           
+            <Main>
+              <Dashboard/>
+            </Main>
             <Footer></Footer>
     </ThemeProvider>
     
