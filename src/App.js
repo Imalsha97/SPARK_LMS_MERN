@@ -49,7 +49,9 @@ function App() {
             <Main>
               <Dashboard/>
             </Main>
-            <Footer></Footer>
+            <Footer>
+              Copyright {new Date().getFullYear()} Spark Acedemy {""}
+            </Footer>
     </ThemeProvider>
     
     
