@@ -1,12 +1,25 @@
-import React from "react";
+import React, { Suspense} from "react";
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 import { Main, Footer ,Header } from "./components/Layout";
 import { NavBar,NavItem,NavLink } from "./components/Navbar";
+import Spinner from "./components/Spinner";
 
-import Dashboard from "./containers/Dashboard";
+import { DASHBOARD , CATALOG} from  "./shared/routes";
+
+// import Dashboard from "./containers/Dashboard";
+
+const Dashboard = React.lazy(() => {
+  return import("./containers/Dashboard");
+})
 
 
 function App() {
@@ -23,6 +36,17 @@ function App() {
           spacing : (factor) => `$(factor * 8)px`,
 
         };
+
+        let  routes = (
+          <Suspense fallback={<Spinner />}>
+          <Switch>
+          <Route exact path={DASHBOARD} component={Dashboard}/>
+          <Route exact  path={CATALOG} component={Spinner}/>
+
+        </Switch>
+        </Suspense>
+
+        );
 
   return (
     <ThemeProvider theme={theme}>
@@ -51,7 +75,9 @@ function App() {
      </Header>
      
             <Main>
-              <Dashboard/>
+              <Router>
+                {routes}
+              </Router>
             </Main>
             <Footer>
               Copyright {new Date().getFullYear()} Spark Acedemy {""}
