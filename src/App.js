@@ -1,11 +1,12 @@
 import React from "react";
-import ReactDom from 'react-dom';
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
 
 
-import { Header,Main, Footer } from "./components/Layout";
+import { Main, Footer ,Header } from "./components/Layout";
 import { NavBar,NavItem,NavLink } from "./components/Navbar";
+
+import Dashboard from "./containers/Dashboard";
 
 
 function App() {
@@ -19,13 +20,14 @@ function App() {
           secondary : {
             main:"#fff",
           },
+          spacing : (factor) => `$(factor * 8)px`,
 
         };
 
   return (
     <ThemeProvider theme={theme}>
      <Header>
-      <NavBar>
+     <NavBar>
       <NavItem href="#">
             <NavLink>
             <BsBookHalf/>
@@ -37,16 +39,23 @@ function App() {
             Catalog
             </NavLink>
         </NavItem>
-        
+
         <NavItem href="#">
           <NavLink>
             Dashboard
           </NavLink>
         </NavItem>
       </NavBar>
-            </Header>
-            <Main></Main>
-            <Footer></Footer>
+           
+
+     </Header>
+     
+            <Main>
+              <Dashboard/>
+            </Main>
+            <Footer>
+              Copyright {new Date().getFullYear()} Spark Acedemy {""}
+            </Footer>
     </ThemeProvider>
     
     

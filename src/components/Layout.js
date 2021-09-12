@@ -5,10 +5,15 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`    
-        height : 95vh;
+        min-height : 95vh;
+        padding: ${(props) =>props.theme.spacing(1)};
+        display :  flex;
+        align-item : center;
 `;
 
 export const Footer = styled.footer`    
         display : flex;
         justify-content : center;
+        padding: 1em;
+        border-top: 1px solid  #ccc;
 `;
