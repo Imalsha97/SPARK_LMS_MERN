@@ -4,7 +4,8 @@ import React , { useState } from "react";
 export const TabsContainer = styled.div`
     overflow: hidden;
     background : #fff;
-    height : 100%
+    height : 100%;
+    width :100%;
 `;
 const TabButtonContainer = styled.div`
     display:flex;
