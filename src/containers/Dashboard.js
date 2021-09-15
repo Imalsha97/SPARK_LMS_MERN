@@ -1,27 +1,16 @@
-import React from "react";
-import Tabs from "../components/Tabs"; 
+import React from 'react';
+
+import Tabs  from "../components/Tabs";
 
 const Dashboard = () => {
-    // const [active,setActive] = useState(0);
-    // const handleClick = (event) =>{
-    //     const index = parseInt(event.target.id, 0);
-    //     if (index !== active){
-    //         setActive(index);
-    //     }
     const contents = [
-        {title:"Books",elements:<h1>Contents of books go here</h1>},
-        {title:"Members",elements:<h1>Contents of Members go here</h1>},
+        {title: "Books", elements: <h1>Content of books go here</h1>},
+        {title: "Members", elements: <h1>Content of members go here</h1>},
     ]
 
-
     return (
-
-
-        <Tabs contents = {contents} />
-        
-    
+        <Tabs contents={contents} />
     );
+};
 
-
-    };
-export default Dashboard;
+export default Dashboard
