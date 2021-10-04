@@ -17,9 +17,9 @@ import { DASHBOARD, CATALOG } from "./shared/routes";
 const Dashboard = React.lazy(() => {
    return import("./containers/Dashboard");
 });
-// const NotFound = React.lazy(()=>{
-//    return import("./containers/404");
-// });
+const NotFound = React.lazy(()=>{
+   return import("./containers/404");
+});
 
 function App() {
    const theme = {
@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/" component={Dashboard} />
             <Route exact path={DASHBOARD} component={Dashboard} />
             <Route exact path={CATALOG} component={Spinner} />
-            {/* <Route component={NotFound} /> */}
+            <Route component={NotFound} />
          </Switch>
       </Suspense>
         
@@ -55,15 +55,15 @@ function App() {
          <Header>
             <NavBar>
                <NavItem>
-                  <NavLink href="#">
+                  <NavLink href={CATALOG}>
                      <BsBookHalf></BsBookHalf>
                   </NavLink>
                </NavItem>
                <NavItem>
-                  <NavLink href="#">Catalog</NavLink>
+                  <NavLink href={CATALOG}>Catalog</NavLink>
                </NavItem>
                <NavItem>
-                  <NavLink href="#">Dashboard</NavLink>
+                  <NavLink href={DASHBOARD}>Dashboard</NavLink>
                  
                </NavItem>
             </NavBar>
