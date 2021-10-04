@@ -1,15 +1,25 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 
 import { Main, Footer, Header } from "./components/Layout";
 import { NavBar, NavItem, NavLink } from "./components/Navbar";
+import Spinner from "./components/Spinner";
 // import Spinner from "./componets/Spinner";
 
-import Dashboard from "./containers/Dashboard";
-// import { DASHBOARD, CATALOG } from "./shared/routes";
+// import Dashboard from "./containers/Dashboard";
+import { DASHBOARD, CATALOG } from "./shared/routes";
 
+
+const Dashboard = React.lazy(() => {
+   return import("./containers/Dashboard");
+});
+// const NotFound = React.lazy(()=>{
+//    return import("./containers/404");
+// });
 
 function App() {
    const theme = {
@@ -25,7 +35,20 @@ function App() {
       spacing: (factor) => `${factor * 8}px`,
    };
 
-   
+   let routes = (
+      <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path={DASHBOARD} component={Dashboard} />
+            <Route exact path={CATALOG} component={Spinner} />
+            {/* <Route component={NotFound} /> */}
+         </Switch>
+      </Suspense>
+        
+           
+      
+      
+   );
 
    return (
       <ThemeProvider theme={theme}>
@@ -46,7 +69,7 @@ function App() {
             </NavBar>
          </Header>
          <Main>
-         <Dashboard />
+         <Router>{routes}</Router>
          </Main>
          <Footer>
             Copyright {new Date().getFullYear()} &#169; Spark Academy
