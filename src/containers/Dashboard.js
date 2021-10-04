@@ -1,5 +1,6 @@
 import React  from  "react";
 import Tabs from "../components/Tabs";
+import Spinner from "../components/Spinner";
 const Dashboard = () => {
     const contents = [
         {title:"Books",elements:<h1>Content books</h1>},
