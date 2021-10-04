@@ -1,81 +1,56 @@
-// third party libraries
-import React, { Suspense } from "react";
-import {ThemeProvider} from "styled-components"
-import { BsBook } from "react-icons/bs";
-import { BrowserRouter as Router, Switch,Route} from "react-router-dom";
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { BsBookHalf } from "react-icons/bs";
 
-// presantational components
-import { Main, Footer, Header} from "./components/Layout";
-import { NavBar, NavItem,NavLink } from "./components/Navbar";
-import Spinner from "./components/Spinner";
 
-// container components-logical components
-import { DASHBOARD, CATALOG } from "./shared/routes";
+import { Main, Footer, Header } from "./componets/layout";
+import { NavBar, NavItem, NavLink } from "./componets/Navbar";
+// import Spinner from "./componets/Spinner";
 
-const Dashboard = React.lazy(() => {
-  return import("./containers/Dashboard");
-});
+// import { DASHBOARD, CATALOG } from "./shared/routes";
 
-const NotFound = React.lazy(() => {
-  return import("./containers/404");
-});
 
 function App() {
-  const theme = {
-    primary:{
-      main: "#29b6f6",
-      light: "#73e8ff",
-      dark: "#0086c3",
-      textColor: "#000",
-    },
-    secondary: {
-      main: "#fff",
-    },
-    spacing: (factor) => `${factor * 8}px`,
-  };
+   const theme = {
+      primary: {
+         main: "#29b6f6",
+         light: "#73e8ff",
+         dark: "#0086c3",
+         textColor: "#000",
+      },
+      secondary: {
+         main: "#fff",
+      },
+      spacing: (factor) => `${factor * 8}px`,
+   };
 
-  let routes = (
-    <Suspense fallback={<Spinner />}>
-      <Switch>
-        <Route exact path={DASHBOARD} component = {Dashboard} />
-        <Route exact path={CATALOG} component = {Spinner} />
-       
-        <Route exact path="/" component = {Dashboard} />
-        <Route component = {NotFound} />
-      </Switch>
-    </Suspense>
-  );
+   
 
-  return (
-    <ThemeProvider theme = {theme}>
-      <Header>
-        <NavBar>
-          <NavItem>
-            <NavLink href={CATALOG}>
-              <BsBook />
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href={CATALOG}>Catalog</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href={DASHBOARD}>DashBoard</NavLink>
-          </NavItem>
-        </NavBar>
-      </Header>
-
-      <Main>
-          <Router>
-              {routes}
-          </Router>
-      </Main>
-
-      <Footer>
-        Copyright {new Date().getFullYear()} &copy; Spark Academy{" "}
-      </Footer>
-    </ThemeProvider>
-
-  );
+   return (
+      <ThemeProvider theme={theme}>
+         <Header>
+            <NavBar>
+               <NavItem>
+                  <NavLink href="#">
+                     <BsBookHalf></BsBookHalf>
+                  </NavLink>
+               </NavItem>
+               <NavItem>
+                  <NavLink href="#">Catalog</NavLink>
+               </NavItem>
+               <NavItem>
+                  <NavLink href="#">Dashboard</NavLink>
+               </NavItem>
+            </NavBar>
+         </Header>
+         <Main>
+           
+         </Main>
+         <Footer>
+            Copyright {new Date().getFullYear()} &#169; Spark Academy
+         </Footer>
+      </ThemeProvider>
+   );
 }
 
 export default App;
