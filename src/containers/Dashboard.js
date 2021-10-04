@@ -1,37 +1,28 @@
-import React, { useEffect ,useState } from 'react';
-
-import Tabs  from "../components/Tabs";
-
-import { getBooks } from '../api/bookAPI';
-import Spinner from '../components/Spinner';
-
+import React, { useState } from  "react";
+import { Content , Tab , TabContent , Tabs } from "../components/Tabs"
 const Dashboard = () => {
-    const [isLoading , setIsLoading] = useState(false);
+    const [active , setActive ] = useState(0);
 
-    useEffect(()=>{
-            setIsLoading(true);
-            getBooks()
-                .then((response)=>{
-                    if(!response.error){
-                        console.log(response.data);
-                    }
-                })
-                .catch((error) =>{
-                    console.log(error);
-                })
-                .finally(()=>{
-                    setIsLoading(false);
-                })
-    }, [])
-
-    const contents = [
-        {title: "Books", elements: <h1>Content of books go here</h1>},
-        {title: "Members", elements: <h1>Content of members go here</h1>},
-    ]
-
+    const handleClick = (event) => {
+        const index = parseInt(event.target.id,0);
+        if (index !== active){
+            setActive(index);
+        }
+    }
     return (
-        isLoading ? <Spinner/> : <Tabs contents={contents} />
+       <Tabs>
+           <Tab id={0} onClick={handleClick} active={active === 0}>Content 1</Tab>
+           <Tab id={1} onClick={handleClick} active={active === 1}>Content 2</Tab>
+           <TabContent>
+               <Content active={active === 0}>
+                   <h1>ccc1</h1>
+               </Content>
+               <Content active={active === 1}>
+                   <h1>ccc2</h1>
+               </Content>
+           </TabContent>
+       </Tabs>
     );
-};
-
+}
 export default Dashboard
+

@@ -3,10 +3,11 @@ import { ThemeProvider } from "styled-components";
 import { BsBookHalf } from "react-icons/bs";
 
 
-import { Main, Footer, Header } from "./componets/layout";
-import { NavBar, NavItem, NavLink } from "./componets/Navbar";
+import { Main, Footer, Header } from "./components/Layout";
+import { NavBar, NavItem, NavLink } from "./components/Navbar";
 // import Spinner from "./componets/Spinner";
 
+import Dashboard from "./containers/Dashboard";
 // import { DASHBOARD, CATALOG } from "./shared/routes";
 
 
@@ -40,11 +41,12 @@ function App() {
                </NavItem>
                <NavItem>
                   <NavLink href="#">Dashboard</NavLink>
+                 
                </NavItem>
             </NavBar>
          </Header>
          <Main>
-           
+         <Dashboard />
          </Main>
          <Footer>
             Copyright {new Date().getFullYear()} &#169; Spark Academy
