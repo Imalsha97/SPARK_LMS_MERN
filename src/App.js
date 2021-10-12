@@ -9,6 +9,8 @@ import Spinner from "./components/Spinner";
 
 import { DASHBOARD, CATALOG } from "./shared/routes";
 
+
+
 const Dashboard = React.lazy(() => {
   return import("./containers/Dashboard");
 });
