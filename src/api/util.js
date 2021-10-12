@@ -16,3 +16,20 @@ export const getRequest = async (uri) => {
     };
   }
 };
+
+
+//borrow book->put request
+export const putRequest = async (uri,data) => {
+  try{
+    let response = await axios.put(uri, data);
+    return {
+      data : response.data,
+      error : null
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: error
+    };
+  }
+}
