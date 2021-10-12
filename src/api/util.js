@@ -1,18 +1,18 @@
-import axios from '../shared/axios';
-//Utility functions
+import axios from "../shared/axios";
 
-export const getRequest = async (url) =>{
+//utility functions
+export const getRequest = async (uri) => {
+  try {
+    let response = await axios.get(uri);
 
-    try{
-        let response = await axios.get(url);
-        return{
-            data : response.data,
-            error : null
-        };
-    } catch(error){
-        return{
-            data : null,
-            error : error
-        }
-    }
+    return {
+      data: response.data,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: error,
+    };
+  }
 };
