@@ -22,8 +22,8 @@ const LendDialog = ({ handleClose, show }) => {
 
    useEffect(() => {
       setIsLoading(true);
-      const responce = getMembers();
-      setMembers(responce);
+      const response = getMembers();
+      setMembers(response);
       setIsLoading(false);
    }, []);
 
