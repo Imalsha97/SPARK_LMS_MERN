@@ -11,7 +11,7 @@ import {
 import Spinner from "../../../components/Spinner";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 
-import { getBook , lendBook } from "../../../api/bookAPI";
+import { getBook , lendBook , returnBook } from "../../../api/bookAPI";
 import BookCoverPlaceholder from "../../../shared/book-cover-placeholder.png";
 import LendDialog from "./LeadDialog";
 import { getTodaysDate } from "../../../shared/utils";
@@ -33,6 +33,7 @@ const Book = ({ id, handleBackClick }) => {
   const [book, setBook] = useState(null);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showLendConfirmation, setShowLendConfirmation ] = useState(false);
+  const [showReturnConfirmation, setShowReturnConfirmation ] = useState(false);
 
  
 
@@ -65,6 +66,12 @@ const Book = ({ id, handleBackClick }) => {
     }
     setShowLendConfirmation(false);
  };
+ const handleReturn = (confirmed) => {
+  if (confirmed) {
+    returnBook(book.id);
+  }
+    setShowReturnConfirmation(false);
+};
 
   return (
     <>
@@ -113,7 +120,7 @@ const Book = ({ id, handleBackClick }) => {
                 <>
                   <h4>{`Burrowed by: ${book.borrowedMemberId}`}</h4>
                   <h4>{`Burrowed date: ${book.borrowedDate}`}</h4>
-                  <Button onClick={() => console.log("Call return API")}>
+                  <Button onClick={() => setShowReturnConfirmation(true)}>
                     Return
                   </Button>
                 </>
@@ -131,6 +138,12 @@ const Book = ({ id, handleBackClick }) => {
         detailText="Are you sure want to delete this book? This action can't be undone."
       />
       <LendDialog show={showLendConfirmation} handleClose={handleLend} />
+      <ConfirmationDialog
+        handleClose={handleReturn}
+        show={showReturnConfirmation}
+        headerText="Confirm book return"
+        detailText="Press 'Confirm' to return book"
+      />
     </>
   );
 };
