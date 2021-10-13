@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
 
 import {
   Button,
@@ -15,6 +16,7 @@ import { getBook , lendBook , returnBook , deleteBook } from "../../../api/bookA
 import BookCoverPlaceholder from "../../../shared/book-cover-placeholder.png";
 import LendDialog from "./LeadDialog";
 import { getTodaysDate } from "../../../shared/utils";
+import { updateBook } from "../../../store/booksSlice";
 
 const ContainerInlineTextAlignLeft = styled(ContainerInline)`
   align-items: flex-start;
@@ -34,6 +36,8 @@ const Book = ({ id, handleBackClick }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showLendConfirmation, setShowLendConfirmation ] = useState(false);
   const [showReturnConfirmation, setShowReturnConfirmation ] = useState(false);
+
+  const dispatch = useDispatch();
 
  
 
@@ -62,7 +66,19 @@ const Book = ({ id, handleBackClick }) => {
 
   const handleLend = (confirmed, memberId) => {
     if (confirmed) {
-       lendBook(book.id, memberId, getTodaysDate());
+      setIsLoading(true);
+       lendBook(book.id, memberId, getTodaysDate()).then((response) => {
+         if (!response.error){
+           console.log(response.data);
+           dispatch(updateBook(response.data));
+         }
+       })
+       .catch((error) => {
+         console.log(error);
+       })
+       .finally(() => {
+         setIsLoading(false);
+       });
     }
     setShowLendConfirmation(false);
  };
