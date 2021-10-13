@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const bookSlice = createSlice({
     name: 'books',
     initialState: {
-      value: null,
+      value: [],
     },
     reducers: {
       setBooks: (state, action) => {
@@ -18,7 +18,7 @@ export const bookSlice = createSlice({
           (element) => element.id === id
         );
         updatedBooks.splice(index , 1 , action.payload);
-        state.value = action.payload;
+        state.value =updatedBooks ;
       },
     },
   });
