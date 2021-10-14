@@ -21,7 +21,7 @@ const Dashboard = () => {
       .then((response) => {
         if (!response.error) {
           
-          console.log(response.data);
+          
           dispatch(setBooks(response.data));
 
         }
