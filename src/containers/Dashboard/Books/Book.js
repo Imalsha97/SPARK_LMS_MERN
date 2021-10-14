@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 
 import {
   Button,
@@ -12,7 +12,7 @@ import {
 import Spinner from "../../../components/Spinner";
 import ConfirmationDialog from "../../../components/ConfirmationDialog";
 
-import { getBook , lendBook , returnBook , deleteBook } from "../../../api/bookAPI";
+import { lendBook , returnBook , deleteBook } from "../../../api/bookAPI";
 import BookCoverPlaceholder from "../../../shared/book-cover-placeholder.png";
 import LendDialog from "./LeadDialog";
 import { getTodaysDate } from "../../../shared/utils";
@@ -32,31 +32,19 @@ const H2 = styled.h2`
 
 const Book = ({ id, handleBackClick }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [book, setBook] = useState(null);
+  
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showLendConfirmation, setShowLendConfirmation ] = useState(false);
   const [showReturnConfirmation, setShowReturnConfirmation ] = useState(false);
+
+  const books = useSelector((state) => state.books.value);
+  const book = books.find((element) => element.id === id);
 
   const dispatch = useDispatch();
 
  
 
-  useEffect(() => {
-    setIsLoading(true);
-    getBook(id)
-      .then((response) => {
-        if (!response.error) {
-          setBook(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [id]);
-
+  
   const handleDelete = (confirmation) => {
     if (confirmation) {
       setIsLoading(true);
@@ -65,6 +53,7 @@ const Book = ({ id, handleBackClick }) => {
          if (!response.error){
            
            dispatch(deleteBookStore(response.data));
+           handleBackClick();
          }
        })
        .catch((error) => {
