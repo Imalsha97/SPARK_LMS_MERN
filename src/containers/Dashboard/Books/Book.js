@@ -16,7 +16,7 @@ import { getBook , lendBook , returnBook , deleteBook } from "../../../api/bookA
 import BookCoverPlaceholder from "../../../shared/book-cover-placeholder.png";
 import LendDialog from "./LeadDialog";
 import { getTodaysDate } from "../../../shared/utils";
-import { updateBook } from "../../../store/booksSlice";
+import { updateBook ,deleteBook as deleteBookStore} from "../../../store/booksSlice";
 
 const ContainerInlineTextAlignLeft = styled(ContainerInline)`
   align-items: flex-start;
@@ -59,7 +59,20 @@ const Book = ({ id, handleBackClick }) => {
 
   const handleDelete = (confirmation) => {
     if (confirmation) {
-      deleteBook(book.id);
+      setIsLoading(true);
+       deleteBook(book.id)
+       .then((response) => {
+         if (!response.error){
+           console.log(response.data);
+           dispatch(deleteBookStore(response.data));
+         }
+       })
+       .catch((error) => {
+         console.log(error);
+       })
+       .finally(() => {
+         setIsLoading(false);
+       });
     }
     setShowDeleteConfirmation(false);
   };
@@ -84,7 +97,20 @@ const Book = ({ id, handleBackClick }) => {
  };
  const handleReturn = (confirmed) => {
   if (confirmed) {
-    returnBook(book.id);
+    setIsLoading(true);
+    returnBook(book.id)
+    .then((response) => {
+      if (!response.error) {
+        console.log(response.data);
+        dispatch(updateBook(response.data));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   }
     setShowReturnConfirmation(false);
 };
@@ -126,7 +152,7 @@ const Book = ({ id, handleBackClick }) => {
               {book.isAvailable ? (
                 <>
                   <Button onClick={() => setShowLendConfirmation(true)}>
-                    Lead
+                    Lend
                   </Button>
                   <Button color="danger" onClick={() => setShowDeleteConfirmation(true)}>
                     Delete
