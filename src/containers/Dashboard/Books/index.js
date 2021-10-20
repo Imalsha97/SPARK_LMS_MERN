@@ -6,7 +6,10 @@ import { FluidContainer, Button ,Container } from "../../../components/CommonCom
 
 import { useDispatch } from 'react-redux';
 import Book from "./Book";
-import AddBookDialog from "./AddBookDialog";
+// import AddBookDialog from "./AddBookDialog";
+// import AddEditBookDialog from "./AddEditBookDialog";
+import AddEditBookDialog from "./AddEditBookDialog";
+
 
 import { addBook } from "../../../api/bookAPI";
 import { addBook as addBookToStore } from "../../../store/booksSlice";
@@ -61,7 +64,7 @@ const Books = ({ catalog }) => {
         instruction="Click row the view"
       />
     </FluidContainer>
-    <AddBookDialog 
+    <AddEditBookDialog 
       show={showAddBookDialog}
       handleClose={handleAddBook}
       />
