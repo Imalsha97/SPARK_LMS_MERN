@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const bookSlice = createSlice({
     name: 'books',
     initialState: {
-      value: [],
+      value: null,
     },
     reducers: {
       setBooks: (state, action) => {
