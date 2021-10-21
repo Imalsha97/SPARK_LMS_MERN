@@ -134,7 +134,7 @@ const handleEdit = (confirmed, data) => {
                 <H1>{book.title}</H1>
                 <H2>{`by ${book.author}`}</H2>
                 <p>
-                  Leran ipsum dolor sit amet,fghjjkajkjksjdbchdh bd bjdk ndn kdn
+                Leran ipsum dolor sit amet,fghjjkajkjksjdbchdh bd bjdk ndn kdn
                   njdj dbh vdhdb
                 </p>
                 {book.isAvailable ? (
