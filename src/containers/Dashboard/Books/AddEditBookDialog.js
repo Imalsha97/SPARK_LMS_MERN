@@ -9,14 +9,23 @@ import { Modal, DialogBox } from "../../../components/Modal";
 
 import Input from "../../../components/input";
 
-export default function AddEditBookDialog({ isEdit = false, handleClose, show , data}) {
-   const [title, setTitle] = useState( isEdit && data && data.title ? data.title : "");
-   const [author, setAuthor] = useState(isEdit && data && data.author ? data.author : "");
+export default function AddBookDialog({
+   isEdit = false,
+   handleClose,
+   show,
+   data,
+}) {
+   const [title, setTitle] = useState(
+      isEdit && data && data.title ? data.title : ""
+   );
+   const [author, setAuthor] = useState(
+      isEdit && data && data.author ? data.author : ""
+   );
 
    const clearInput = () => {
       setTitle("");
       setAuthor("");
-   }
+   };
 
    const sendDone = () => {
       if (title !== "" && author !== "") {
@@ -31,9 +40,9 @@ export default function AddEditBookDialog({ isEdit = false, handleClose, show , 
    };
 
    const sendCancel = () => {
-     !isEdit && clearInput();
-      handleClose(false, null); 
-   }; 
+      !isEdit && clearInput();
+      handleClose(false, null);
+   };
 
    return (
       <Modal show={show}>
