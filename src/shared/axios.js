@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const lmsAPIMostProd = "https://lms-backend4.herokuapp.com/";
-const lmsAPIMostDev = "http://localhost:3001";
+const lmsAPIMostDev = "http://localhost:3000";
 const lmsAPIMost =
   process.env.NODE_ENV === "development" ? lmsAPIMostDev : lmsAPIMostProd;
 
